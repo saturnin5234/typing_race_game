@@ -66,6 +66,13 @@ io.on("connection", (socket) => {
     broadcastRoomState(room);
   });
 
+  socket.on("game:end", () => {
+    const room = roomManager.getRoom(socket.data.roomCode);
+    if (!room || room.hostId !== socket.id) return;
+    room.forceFinish();
+    broadcastRoomState(room);
+  });
+
   socket.on("game:rematch", () => {
     const room = roomManager.getRoom(socket.data.roomCode);
     if (!room || room.hostId !== socket.id) return;

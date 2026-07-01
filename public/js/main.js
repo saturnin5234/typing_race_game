@@ -23,6 +23,7 @@ const trackEl = document.getElementById("track");
 const phraseDisplay = document.getElementById("phrase-display");
 const typingInput = document.getElementById("typing-input");
 const raceHint = document.getElementById("race-hint");
+const endRaceBtn = document.getElementById("end-race-btn");
 
 const resultsList = document.getElementById("results-list");
 const rematchBtn = document.getElementById("rematch-btn");
@@ -71,6 +72,10 @@ rematchBtn.addEventListener("click", () => {
   socket.emit("game:rematch");
 });
 
+endRaceBtn.addEventListener("click", () => {
+  socket.emit("game:end");
+});
+
 socket.on("room:error", (message) => {
   landingError.textContent = message;
 });
@@ -82,6 +87,7 @@ socket.on("game:go", ({ phrase, startTime }) => {
   typingInput.value = "";
   typingInput.disabled = true;
   raceHint.textContent = "";
+  endRaceBtn.hidden = true;
   showView("race");
   renderPhrase("");
   runCountdown();
@@ -143,6 +149,10 @@ function renderRace() {
     typingInput.disabled = true;
     raceHint.textContent = `You finished ${ordinal(self.placement)}! Waiting for the other racers...`;
   }
+
+  const isHost = currentState.hostId === selfId;
+  const anyoneFinished = currentState.players.some((p) => p.finished);
+  endRaceBtn.hidden = !(isHost && anyoneFinished);
 }
 
 function renderResults() {

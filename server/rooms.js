@@ -79,6 +79,18 @@ class Room {
     return player.placement;
   }
 
+  forceFinish() {
+    if (this.state !== "racing") return;
+    const stragglers = [...this.players.values()]
+      .filter((p) => !p.finished)
+      .sort((a, b) => b.progress - a.progress);
+    for (const player of stragglers) {
+      player.finished = true;
+      player.placement = this.nextPlacement++;
+    }
+    this.state = "finished";
+  }
+
   resetToLobby() {
     this.state = "lobby";
     this.phrase = null;

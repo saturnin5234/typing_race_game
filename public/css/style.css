@@ -96,6 +96,17 @@ button:disabled {
   background: #3d7548;
 }
 
+.btn-secondary {
+  margin-top: 12px;
+  background: transparent;
+  color: #567a5f;
+  border: 1px solid #9fc3a6;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #dcefe0;
+}
+
 .error {
   color: #b0342c;
   text-align: center;
