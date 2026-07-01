@@ -116,7 +116,7 @@ function renderLobby() {
   for (const player of currentState.players) {
     const li = document.createElement("li");
     const isHost = player.id === currentState.hostId;
-    li.innerHTML = `<span class="icon">${player.emoji}</span><span>${escapeHtml(player.name)}</span>${
+    li.innerHTML = `${iconImg(player.icon, "icon")}<span>${escapeHtml(player.name)}</span>${
       isHost ? '<span class="host-tag">HOST</span>' : ""
     }`;
     playerList.appendChild(li);
@@ -137,7 +137,7 @@ function renderRace() {
     lane.innerHTML = `
       <div class="lane-name">${escapeHtml(player.name)}</div>
       <div class="lane-track">
-        <div class="lane-racer" style="left: ${player.progress}%">${player.emoji}</div>
+        <div class="lane-racer" style="left: ${player.progress}%">${iconImg(player.icon, "racer-icon")}</div>
         <div class="lane-flag">\u{1F3C1}</div>
       </div>
     `;
@@ -161,7 +161,7 @@ function renderResults() {
   const sorted = [...currentState.players].sort((a, b) => (a.placement || 99) - (b.placement || 99));
   for (const player of sorted) {
     const li = document.createElement("li");
-    li.textContent = `${ordinal(player.placement)} - ${player.emoji} ${player.name}`;
+    li.innerHTML = `${ordinal(player.placement)} - ${iconImg(player.icon, "icon")} ${escapeHtml(player.name)}`;
     resultsList.appendChild(li);
   }
   const isHost = currentState.hostId === selfId;
@@ -233,4 +233,8 @@ function escapeHtml(str) {
   const div = document.createElement("div");
   div.textContent = str;
   return div.innerHTML;
+}
+
+function iconImg(icon, className) {
+  return `<img class="${className}" src="/icons/${icon}.png" alt="${icon}">`;
 }

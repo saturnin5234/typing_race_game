@@ -1,12 +1,7 @@
 const { randomPhrase } = require("./phrases");
 
 const MAX_PLAYERS = 4;
-const RACER_ICONS = [
-  { id: "snail", emoji: "\u{1F40C}" }, // 🐌
-  { id: "slug", emoji: "\u{1FAB1}" }, // 🪱 (no dedicated slug emoji exists, worm is the closest)
-  { id: "tortoise", emoji: "\u{1F422}" }, // 🐢
-  { id: "sloth", emoji: "\u{1F9A5}" }, // 🦥
-];
+const RACER_ICONS = [{ id: "snail" }, { id: "slug" }, { id: "tortoise" }, { id: "sloth" }];
 const CODE_CHARS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // no 0/O/1/I to avoid confusion
 
 class Room {
@@ -28,7 +23,6 @@ class Room {
       id,
       name: name.slice(0, 16) || "Player",
       icon: icon.id,
-      emoji: icon.emoji,
       progress: 0,
       finished: false,
       placement: null,

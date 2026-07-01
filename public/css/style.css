@@ -144,8 +144,11 @@ button:disabled {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
-.player-list .icon {
-  font-size: 1.4rem;
+.icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .player-list .host-tag {
@@ -192,7 +195,7 @@ button:disabled {
 .lane-track {
   position: relative;
   flex: 1;
-  height: 34px;
+  height: 40px;
   background: #eef6ef;
   border: 1px solid #bcdcc2;
   border-radius: 17px;
@@ -204,8 +207,14 @@ button:disabled {
   top: 50%;
   left: 0;
   transform: translate(-10%, -50%);
-  font-size: 1.6rem;
   transition: left 0.15s linear;
+}
+
+.racer-icon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
 }
 
 .lane-flag {
